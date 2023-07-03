@@ -1,5 +1,6 @@
+
 // import React from 'react';
-import Profile from '../assets/az-flag.png';
+import Profile from '../assets/faridzaidov.jpeg';
 import { AiOutlineDownload } from 'react-icons/ai';
 
 export default function About() {
