@@ -30,7 +30,7 @@ export default function Portfolio() {
                 )}
             </div>
             {itemCount === 3 && <button className='mt-8 border-2 rounded-md w-full md:w-max bg-transparent text-light-green drop-shadow-light font-bold md:px-8 py-2 border-light-green hover:border-bright-green hover:text-bright-green hover:drop-shadow-bright duration-300' onClick={() => setitemCount(0)}>Show More</button>}
-            {itemCount !== 3 && <p className='mt-8 italic text-stone-300'>More in my <a className='text-light-green drop-shadow-light hover:text-bright-green hover:drop-shadow-bright duration-300' target='_blank' href="https://github.com/Turalyusubov">Github</a></p>}
+            {itemCount !== 3 && <p className='mt-8 italic text-stone-300'>More in my <a className='text-light-green drop-shadow-light hover:text-bright-green hover:drop-shadow-bright duration-300' target='_blank' href="https://github.com/faridzaidov">Github</a></p>}
         </div>
     )
 }
