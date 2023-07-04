@@ -4,15 +4,15 @@ import { projects } from '../projects'
 
 export default function Portfolio() {
     const [itemCount, setitemCount] = useState(3)
-    const itemsToShow = projects.slice(itemCount).reverse()
-
-    const showMore = () => {
-        if (itemCount === 3) {
-            setitemCount(0)
-        } else {
-            setitemCount(3)
-        }
-    }
+    console.log("salam",projects);
+    const itemsToShow = projects.reverse()
+    // const showMore = () => {
+    //     if (itemCount === 3) {
+    //         setitemCount(0)
+    //     } else {
+    //         setitemCount(3)
+    //     }
+    // }
 
     return (
         <div className='bg-main-green text-stone-100 relative flex flex-col justify-center items-center py-20 h-full w-full px-6 md:px-32'>
