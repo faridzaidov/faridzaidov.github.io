@@ -32,7 +32,7 @@ export default function About() {
             rel="noopener noreferrer"
             target='_blank'
             className='flex gap-2 w-3/5 md:w-max justify-center items-center rounded-md bg-light-green drop-shadow-light text-dark-green font-bold md:px-8 py-2 mt-8 hover:bg-bright-green hover:drop-shadow-bright duration-300'
-            href='https://drive.google.com/file/d/1tDwKBuVpdEOtxVPMwPJIMz0V1rnXSb62/view?usp=sharing'>
+            href='https://drive.google.com/file/d/1HXg_RtdpMz2G2LnlFfxYubVgBqJQMl77/view?usp=drive_link'>
             Resume <AiOutlineDownload className='text-xl' />
           </a>
         </div>
