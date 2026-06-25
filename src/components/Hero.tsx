@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { ArrowDown, Github, Linkedin, Mail, Download } from "lucide-react";
+import { FaTelegram } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -139,6 +140,7 @@ export default function Hero() {
           {[
             { icon: <Github size={20} />, href: "https://github.com/faridzaidov", label: "GitHub" },
             { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/faridzaidov/", label: "LinkedIn" },
+            { icon: <FaTelegram size={20} />, href: "https://t.me/faridzaidov", label: "Telegram" },
             { icon: <Mail size={20} />, href: "mailto:feridzaidovv@gmail.com", label: "Email" },
           ].map((s) => (
             <a

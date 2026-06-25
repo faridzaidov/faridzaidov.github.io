@@ -1,6 +1,7 @@
 "use client";
 
 import { Github, Linkedin, Mail } from "lucide-react";
+import { FaTelegram } from "react-icons/fa";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -27,6 +28,7 @@ export default function Footer() {
           {[
             { icon: <Github size={16} />, href: "https://github.com/faridzaidov", label: "GitHub" },
             { icon: <Linkedin size={16} />, href: "https://www.linkedin.com/in/faridzaidov/", label: "LinkedIn" },
+            { icon: <FaTelegram size={16} />, href: "https://t.me/faridzaidov", label: "Telegram" },
             { icon: <Mail size={16} />, href: "mailto:feridzaidovv@gmail.com", label: "Email" },
           ].map((s) => (
             <a

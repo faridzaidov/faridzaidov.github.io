@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Mail, Linkedin, Github, Send, CheckCircle } from "lucide-react";
+import { FaTelegram } from "react-icons/fa";
 import { SectionHeader } from "./About";
 
 export default function Contact() {
@@ -35,6 +36,13 @@ export default function Contact() {
       value: "linkedin.com/in/faridzaidov",
       href: "https://www.linkedin.com/in/faridzaidov/",
       color: "#0A66C2",
+    },
+    {
+      icon: <FaTelegram size={20} />,
+      label: "Telegram",
+      value: "@faridzaidov",
+      href: "https://t.me/faridzaidov",
+      color: "#29B5E8",
     },
     {
       icon: <Github size={20} />,
