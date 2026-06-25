@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import GitHubStats from "@/components/GitHubStats";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
+      <GitHubStats />
       <Projects />
       <Experience />
       <Contact />

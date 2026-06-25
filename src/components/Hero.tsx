@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Download } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -13,7 +13,6 @@ export default function Hero() {
         <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-600/5 blur-[100px] pointer-events-none" />
       </div>
 
-      {/* Floating tech logos */}
       <FloatingLogos />
 
       {/* Grid overlay */}
@@ -88,13 +87,11 @@ export default function Hero() {
           <span className="text-[#00D4FF] font-semibold">4+ years</span> of
           experience building scalable web and mobile applications. I craft
           seamless experiences with{" "}
-          <span className="text-white font-medium">
-            React, Next.js, TypeScript
-          </span>{" "}
-          and{" "}
-          <span className="text-white font-medium">Flutter & Dart</span>.
+          <span className="text-white font-medium">React, Next.js, TypeScript</span>{" "}
+          and <span className="text-white font-medium">Flutter & Dart</span>.
         </motion.p>
 
+        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,27 +99,37 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <button
-            onClick={() => {
-              document
-                .querySelector("#projects")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() =>
+              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })
+            }
             className="px-8 py-4 rounded-xl bg-[#00D4FF] text-[#040d21] font-heading font-bold text-base hover:bg-cyan-300 transition-all duration-200 hover:shadow-[0_0_30px_rgba(0,212,255,0.4)] hover:-translate-y-0.5"
           >
             View My Work
           </button>
+
+          <a
+            href="/faridzaidov_cv.pdf"
+            download="Farid_Zaidov_CV.pdf"
+            className="flex items-center gap-2 px-8 py-4 rounded-xl border border-[#00D4FF]/40 text-white font-heading font-semibold text-base hover:border-[#00D4FF] hover:bg-[#00D4FF]/5 transition-all duration-200 hover:-translate-y-0.5 group"
+          >
+            <Download
+              size={18}
+              className="group-hover:animate-bounce transition-all"
+            />
+            Download CV
+          </a>
+
           <button
-            onClick={() => {
-              document
-                .querySelector("#contact")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-8 py-4 rounded-xl border border-[#00D4FF]/40 text-white font-heading font-semibold text-base hover:border-[#00D4FF] hover:bg-[#00D4FF]/5 transition-all duration-200 hover:-translate-y-0.5"
+            onClick={() =>
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="px-8 py-4 rounded-xl border border-white/10 text-slate-300 font-heading font-semibold text-base hover:border-white/25 hover:text-white transition-all duration-200 hover:-translate-y-0.5"
           >
             Contact Me
           </button>
         </motion.div>
 
+        {/* Social links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -130,21 +137,9 @@ export default function Hero() {
           className="flex items-center justify-center gap-5"
         >
           {[
-            {
-              icon: <Github size={20} />,
-              href: "https://github.com/faridzaidov",
-              label: "GitHub",
-            },
-            {
-              icon: <Linkedin size={20} />,
-              href: "https://www.linkedin.com/in/faridzaidov/",
-              label: "LinkedIn",
-            },
-            {
-              icon: <Mail size={20} />,
-              href: "mailto:feridzaidovv@gmail.com",
-              label: "Email",
-            },
+            { icon: <Github size={20} />, href: "https://github.com/faridzaidov", label: "GitHub" },
+            { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/faridzaidov/", label: "LinkedIn" },
+            { icon: <Mail size={20} />, href: "mailto:feridzaidovv@gmail.com", label: "Email" },
           ].map((s) => (
             <a
               key={s.label}
@@ -168,10 +163,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500"
       >
         <span className="text-xs font-mono uppercase tracking-widest">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
           <ArrowDown size={16} />
         </motion.div>
       </motion.div>
@@ -182,7 +174,6 @@ export default function Hero() {
 function FloatingLogos() {
   return (
     <>
-      {/* Flutter logo — top right */}
       <motion.div
         className="absolute top-24 right-16 md:right-32 opacity-20 hidden sm:block"
         animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
@@ -196,7 +187,6 @@ function FloatingLogos() {
         </svg>
       </motion.div>
 
-      {/* React logo — left */}
       <motion.div
         className="absolute top-1/3 left-8 md:left-24 opacity-15 hidden sm:block"
         animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
@@ -212,7 +202,6 @@ function FloatingLogos() {
         </svg>
       </motion.div>
 
-      {/* Next.js logo — bottom right */}
       <motion.div
         className="absolute bottom-32 right-8 md:right-40 opacity-15 hidden sm:block"
         animate={{ y: [0, -15, 0] }}
@@ -229,7 +218,6 @@ function FloatingLogos() {
         </svg>
       </motion.div>
 
-      {/* TypeScript logo — top left */}
       <motion.div
         className="absolute top-1/2 left-4 md:left-16 opacity-15 hidden md:block"
         animate={{ y: [0, 14, 0] }}

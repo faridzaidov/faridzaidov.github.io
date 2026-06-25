@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     siteName: "Farid Zaidov Portfolio",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/avatar.jpg",
+        width: 930,
+        height: 1200,
         alt: "Farid Zaidov — Frontend & Flutter Developer",
       },
     ],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "Farid Zaidov — Frontend & Flutter Developer",
     description:
       "Results-driven Frontend & Flutter Developer with 4+ years of experience.",
-    images: ["/og-image.png"],
+    images: ["/avatar.jpg"],
   },
   robots: {
     index: true,
