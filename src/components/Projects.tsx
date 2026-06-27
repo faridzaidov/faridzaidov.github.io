@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Smartphone, Globe } from "lucide-react";
+import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "./About";
 
 const projects = [
@@ -15,6 +16,13 @@ const projects = [
     tech: ["Flutter", "Dart", "Provider", "REST APIs"],
     type: "mobile" as const,
     highlight: true,
+    screenshots: [
+      "/projects/bcloud/screen-1.png",
+      "/projects/bcloud/screen-2.png",
+      "/projects/bcloud/screen-3.png",
+      "/projects/bcloud/screen-4.png",
+      "/projects/bcloud/screen-5.png",
+    ],
   },
   {
     id: 2,
@@ -25,6 +33,13 @@ const projects = [
     tech: ["Flutter", "Dart", "REST APIs"],
     type: "mobile" as const,
     highlight: false,
+    screenshots: [
+      "/projects/azdoc/screen-1.png",
+      "/projects/azdoc/screen-2.png",
+      "/projects/azdoc/screen-3.png",
+      "/projects/azdoc/screen-4.png",
+      "/projects/azdoc/screen-5.png",
+    ],
   },
   {
     id: 3,
@@ -35,6 +50,7 @@ const projects = [
     tech: ["Flutter", "Dart", "REST APIs"],
     type: "mobile" as const,
     highlight: false,
+    screenshots: [] as string[],
   },
   {
     id: 4,
@@ -46,6 +62,7 @@ const projects = [
     type: "web" as const,
     url: "https://mashin.al",
     highlight: true,
+    screenshots: [] as string[],
   },
   {
     id: 5,
@@ -57,6 +74,7 @@ const projects = [
     type: "web" as const,
     url: "https://infinitech.az",
     highlight: false,
+    screenshots: [] as string[],
   },
 ];
 
@@ -78,6 +96,54 @@ export default function Projects() {
   );
 }
 
+function ScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((c) => (c - 1 + screenshots.length) % screenshots.length);
+  };
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((c) => (c + 1) % screenshots.length);
+  };
+
+  return (
+    <div className="relative w-full rounded-xl overflow-hidden bg-slate-900/50 flex items-center justify-center" style={{ height: 220 }}>
+      <img
+        src={screenshots[current]}
+        alt={`screenshot ${current + 1}`}
+        className="h-full w-auto object-contain"
+      />
+      {screenshots.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute left-1.5 top-1/2 -translate-y-1/2 p-1 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+          >
+            <ChevronLeft size={16} />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+          >
+            <ChevronRight size={16} />
+          </button>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            {screenshots.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+                className={`w-1.5 h-1.5 rounded-full transition-colors ${i === current ? "bg-[#00D4FF]" : "bg-slate-500"}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function ProjectCard({
   project,
   index,
@@ -96,11 +162,23 @@ function ProjectCard({
         project.highlight ? "border-[#00D4FF]/20" : ""
       }`}
     >
-      {/* Top row */}
-      <div className="flex items-start justify-between">
-        <span className="text-4xl">{project.emoji}</span>
-        <TypeBadge type={project.type} />
-      </div>
+      {/* Screenshots carousel or emoji */}
+      {project.screenshots && project.screenshots.length > 0 ? (
+        <ScreenshotCarousel screenshots={project.screenshots} />
+      ) : (
+        <div className="flex items-start justify-between">
+          <span className="text-4xl">{project.emoji}</span>
+          <TypeBadge type={project.type} />
+        </div>
+      )}
+
+      {/* Type badge (when screenshots shown, display badge separately) */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <div className="flex items-center justify-between -mt-1">
+          <span className="text-2xl">{project.emoji}</span>
+          <TypeBadge type={project.type} />
+        </div>
+      )}
 
       {/* Content */}
       <div className="flex-1">
