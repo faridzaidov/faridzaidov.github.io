@@ -1,8 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Globe, RefreshCw, Code2 } from "lucide-react";
+import {
+  SiGit,
+  SiGithub,
+  SiFigma,
+  SiApple,
+  SiAndroid,
+  SiPostman,
+  SiJira,
+} from "react-icons/si";
+import type { IconType } from "react-icons";
 import { SectionHeader } from "./About";
+
+const extras: { name: string; Icon: IconType; color: string }[] = [
+  { name: "Git", Icon: SiGit, color: "#F05032" },
+  { name: "GitHub", Icon: SiGithub, color: "#ffffff" },
+  { name: "Figma", Icon: SiFigma, color: "#A259FF" },
+  { name: "REST APIs", Icon: Globe, color: "#00D4FF" },
+  { name: "Agile / Scrum", Icon: RefreshCw, color: "#F59E0B" },
+  { name: "iOS", Icon: SiApple, color: "#ffffff" },
+  { name: "Android", Icon: SiAndroid, color: "#3DDC84" },
+  { name: "Postman", Icon: SiPostman, color: "#FF6C37" },
+  { name: "VS Code", Icon: Code2, color: "#007ACC" },
+  { name: "Jira", Icon: SiJira, color: "#0052CC" },
+];
 
 const webSkills = [
   { name: "React", color: "#61DAFB", level: 95 },
@@ -62,29 +87,45 @@ export default function Skills() {
             Also familiar with
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {[
-              "Git",
-              "GitHub",
-              "Figma",
-              "REST APIs",
-              "Agile / Scrum",
-              "iOS",
-              "Android",
-              "Postman",
-              "VS Code",
-              "Jira",
-            ].map((t) => (
-              <span
-                key={t}
-                className="px-3 py-1.5 rounded-lg bg-white/4 border border-white/8 text-slate-400 text-sm hover:border-[#00D4FF]/30 hover:text-[#00D4FF] transition-all duration-200 cursor-default"
-              >
-                {t}
-              </span>
+            {extras.map((extra) => (
+              <ExtraBadge key={extra.name} {...extra} />
             ))}
           </div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function ExtraBadge({
+  name,
+  Icon,
+  color,
+}: {
+  name: string;
+  Icon: IconType;
+  color: string;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/4 border text-sm transition-all duration-200 cursor-default"
+      style={{
+        borderColor: hovered ? `${color}4d` : "rgba(255,255,255,0.08)",
+        color: hovered ? color : undefined,
+        boxShadow: hovered ? `0 0 12px ${color}33` : "none",
+      }}
+    >
+      <Icon
+        size={15}
+        style={{ color: hovered ? color : "#94a3b8" }}
+        className="transition-colors duration-200"
+      />
+      <span className={hovered ? "" : "text-slate-400"}>{name}</span>
+    </span>
   );
 }
 

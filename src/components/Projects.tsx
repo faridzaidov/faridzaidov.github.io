@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "./About";
+import MosaicReveal from "./MosaicReveal";
 
 const projects = [
   {
@@ -109,12 +111,15 @@ function ScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
   };
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden bg-slate-900/50 flex items-center justify-center" style={{ height: 220 }}>
-      <img
+    <div className="relative w-full rounded-xl overflow-hidden bg-slate-900/50" style={{ height: 220 }}>
+      <Image
         src={screenshots[current]}
         alt={`screenshot ${current + 1}`}
-        className="h-full w-auto object-contain"
+        fill
+        sizes="(max-width: 768px) 100vw, 400px"
+        className="object-contain"
       />
+      <MosaicReveal />
       {screenshots.length > 1 && (
         <>
           <button
@@ -153,15 +158,49 @@ function ProjectCard({
   index: number;
   inView: boolean;
 }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(x, [-0.5, 0.5], [-8, 8]);
+  const spotlight = useTransform([x, y], (latest) => {
+    const [latestX, latestY] = latest as [number, number];
+    return `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${
+      (latestY + 0.5) * 100
+    }%, rgba(0,212,255,0.15), transparent 60%)`;
+  });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
+      style={{ perspective: 1000 }}
+    >
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className={`group relative glass rounded-2xl p-6 flex flex-col gap-4 card-hover ${
         project.highlight ? "border-[#00D4FF]/20" : ""
       }`}
     >
+      {/* Cursor spotlight */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: spotlight }}
+      />
+
       {/* Screenshots carousel or emoji */}
       {project.screenshots && project.screenshots.length > 0 ? (
         <ScreenshotCarousel screenshots={project.screenshots} />
@@ -226,6 +265,7 @@ function ProjectCard({
           style={{ boxShadow: "inset 0 0 30px rgba(0,212,255,0.05)" }}
         />
       )}
+    </motion.div>
     </motion.div>
   );
 }

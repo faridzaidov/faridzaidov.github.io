@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { ArrowDown, Github, Linkedin, Mail, Download } from "lucide-react";
 import { FaTelegram } from "react-icons/fa";
+import AnimatedTitle from "./AnimatedTitle";
 
 export default function Hero() {
   return (
@@ -50,7 +51,7 @@ export default function Hero() {
             className="text-[#00D4FF]"
             style={{ textShadow: "0 0 30px rgba(0,212,255,0.4)" }}
           >
-            Farid Zaidov
+            <AnimatedTitle text="Farid Zaidov" inView={true} baseDelay={0.5} />
           </span>
         </motion.h1>
 

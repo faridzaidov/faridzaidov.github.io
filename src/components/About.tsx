@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { MapPin, Calendar, Code2, Briefcase } from "lucide-react";
+import AnimatedTitle from "./AnimatedTitle";
+import AnimatedCounter from "./AnimatedCounter";
 
 const stats = [
   { icon: <Calendar size={22} />, value: "4+", label: "Years Experience" },
@@ -38,10 +41,12 @@ export default function About() {
               {/* Photo container */}
               <div className="w-full h-full rounded-2xl bg-gradient-to-br from-[#0a1628] to-[#060e27] border border-white/5 flex items-center justify-center overflow-hidden relative">
                 {/* Real photo */}
-                <img
+                <Image
                   src="/avatar.jpg"
                   alt="Farid Zaidov"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 288px, 320px"
+                  className="object-cover"
                 />
 
                 {/* Decorative corner accent */}
@@ -109,7 +114,11 @@ export default function About() {
                     {s.icon}
                   </div>
                   <div className="font-heading font-bold text-2xl text-white">
-                    {s.value}
+                    <AnimatedCounter
+                      value={s.value}
+                      inView={inView}
+                      delay={0.4 + i * 0.1}
+                    />
                   </div>
                   <div className="text-slate-500 text-xs mt-1">{s.label}</div>
                 </motion.div>
@@ -142,7 +151,7 @@ export function SectionHeader({
         {tag}
       </span>
       <h2 className="font-heading font-bold text-3xl md:text-4xl text-white">
-        {title}
+        <AnimatedTitle text={title} inView={inView} baseDelay={0.15} />
       </h2>
       <div className="w-16 h-1 bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent mx-auto mt-4" />
     </motion.div>
